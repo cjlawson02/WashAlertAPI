@@ -1,0 +1,22 @@
+{
+  "name": "washalertapi",
+  "version": "1.0.0",
+  "description": "API for Cal Poly Laundry Wash Alert System",
+  "main": "api.js",
+  "scripts": {
+    "test": "node api.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chris2fourlaw/WashAlertAPI.git"
+  },
+  "author": "Chris Lawson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chris2fourlaw/WashAlertAPI/issues"
+  },
+  "homepage": "https://github.com/Chris2fourlaw/WashAlertAPI#readme",
+  "dependencies": {
+    "puppeteer": "^5.2.1"
+  }
+}
