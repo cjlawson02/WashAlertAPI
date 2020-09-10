@@ -1,6 +1,19 @@
 const puppeteer = require('puppeteer');
-const util = require('util')
+
+var admin = require("firebase-admin");
+var serviceAccount = require("./.env/serviceAccountKey.json");
+
 const MAIN_URL = "http://washalert.washlaundry.com/washalertweb/calpoly/cal-poly.html"
+
+// Initialize Firebase
+var defaultApp = admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://washalertapi.firebaseio.com"
+});
+var defaultAuth = defaultApp.auth();
+var defaultDatabase = defaultApp.database();
+
+process.setMaxListeners(0);
 
 function processVillageData(table) {
     let villageList = [];
@@ -49,6 +62,7 @@ function processMachineData(table) {
 }
 
 async function fetchVillages(url) {
+    console.log("Fetching Data...");
     const browser = await puppeteer.launch({
         headless: true, // false: enables one to view the Chrome instance in action
         defaultViewport: null, // (optional) useful only in non-headless mode
@@ -114,4 +128,4 @@ async function fetchMachines(location) {
     return machineTable;
 };
 
-fetchVillages(MAIN_URL).then((result) => console.log(JSON.stringify(result, null, 4)));
+setInterval(() => fetchVillages(MAIN_URL).then((result) => defaultDatabase.ref('/').set(result)), 30000);

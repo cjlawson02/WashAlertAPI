@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Chris2fourlaw/WashAlertAPI#readme",
   "dependencies": {
+    "firebase-admin": "^9.1.1",
     "puppeteer": "^5.2.1"
   }
 }
