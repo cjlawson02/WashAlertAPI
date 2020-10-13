@@ -4,7 +4,7 @@
   "description": "API for Cal Poly Laundry Wash Alert System",
   "main": "api.js",
   "scripts": {
-    "test": "node api.js"
+    "test": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Chris2fourlaw/WashAlertAPI#readme",
   "dependencies": {
-    "firebase-admin": "^9.1.1",
-    "puppeteer": "^5.2.1"
+    "@sendgrid/mail": "^7.2.6",
+    "firebase-admin": "^9.2.0",
+    "groupme": "^0.5.8",
+    "puppeteer": "^5.3.1"
   }
 }

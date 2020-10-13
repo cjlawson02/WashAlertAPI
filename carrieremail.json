@@ -1,0 +1,52 @@
+{
+    "carriers": [
+        {
+            "name": "AT&T",
+            "gateway": "@txt.att.net"
+        },
+        {
+            "name": "Boost Mobile",
+            "gateway": "@sms.myboostmobile.com"
+        },
+        {
+            "name": "Cricket Wireless",
+            "gateway": "@mms.cricketwireless.net"
+        },
+        {
+            "name": "Google Project Fi",
+            "gateway": "@msg.fi.google.com"
+        },
+        {
+            "name": "Republic Wireless",
+            "gateway": "@text.republicwireless.com"
+        },
+        {
+            "name": "Sprint",
+            "gateway": "@messaging.sprintpcs.com"
+        },
+        {
+            "name": "Straight Talk",
+            "gateway": "@txt.att.net"
+        },
+        {
+            "name": "T-Mobile",
+            "gateway": "@tmomail.net"
+        },
+        {
+            "name": "Ting",
+            "gateway": "@message.ting.com"
+        },
+        {
+            "name": "U.S. Cellular",
+            "gateway": "@email.uscc.net"
+        },
+        {
+            "name": "Verizon",
+            "gateway": "@vtext.com"
+        },
+        {
+            "name": "Virgin Mobile",
+            "gateway": "@vmobl.com"
+        }
+    ]
+}
