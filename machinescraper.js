@@ -75,7 +75,7 @@ async function fetchVillages(url) {
         }
     });
 
-    await page.goto(url, { waitUntil: 'networkidle2' });
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 3000 }).catch(error => console.error("[Machine Scraper] VILLAGE ERROR:", error));
     const villageList = await page.$eval('table', processVillageData);
     await browser.close();
 
@@ -85,7 +85,7 @@ async function fetchVillages(url) {
     return [villageList, machineList];
 }
 
-async function fetchLocations(village) {
+async function fetchLocations(location) {
     const browser = await puppeteer.launch({
         headless: true, // false: enables one to view the Chrome instance in action
         defaultViewport: null, // (optional) useful only in non-headless mode
@@ -107,7 +107,7 @@ async function fetchLocations(village) {
         }
     });
 
-    await page.goto(village.url, { waitUntil: 'domcontentloaded' });
+    await page.goto(location.url, { waitUntil: 'domcontentloaded', timeout: 3000 }).catch(error => console.error("[Machine Scraper] LOCATION READ ERROR:", error));
     const locationList = await page.$eval('table', processLocationData);
     await browser.close();
 
@@ -144,7 +144,7 @@ async function fetchMachines(location) {
         }
     });
 
-    await page.goto(location.url, { waitUntil: 'domcontentloaded' });
+    await page.goto(location.url, { waitUntil: 'domcontentloaded', timeout: 15000 }).catch(error => console.error("[Machine Scraper] MACHINE READ ERROR:", error));
     const machineTable = await page.$eval('table', processMachineData);
     await browser.close();
 

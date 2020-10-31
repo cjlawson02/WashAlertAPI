@@ -18,8 +18,12 @@ function updateMachines() {
     let time = new Date().getTime()
     machineScraper.fetchVillages(machineScraper.MAIN_URL).then((result) => {
         FirebaseHandler.updateMachineStatus(result);
-        console.log("[App] Took", ((new Date().getTime()) - time) / 1000, "seconds");
+        console.log("[App] Took", ((new Date().getTime()) - time) / 1000, "seconds to fetch new data");
         updateMachines();
+    }).catch((error) => {
+        console.error("[App] FETCH ERROR:", error)
+        console.log("[App] FETCH ERROR:", ((new Date().getTime()) - time) / 1000, "seconds to error");
+        updateMachines()
     });
 }
 

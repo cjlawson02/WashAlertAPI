@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/Chris2fourlaw/WashAlertAPI#readme",
   "dependencies": {
-    "@sendgrid/mail": "^7.2.6",
-    "firebase-admin": "^9.2.0",
+    "@sendgrid/mail": "^7.3.0",
+    "firebase-admin": "^9.3.0",
     "groupme": "^0.5.8",
-    "puppeteer": "^5.3.1"
+    "puppeteer": "^5.4.1"
   }
 }
