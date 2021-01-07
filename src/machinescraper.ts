@@ -5,6 +5,7 @@ export const MAIN_URL = 'http://washalert.washlaundry.com/washalertweb/calpoly/c
 process.setMaxListeners(0);
 
 const machineList = {};
+const ignoredRequests = ['image', 'stylesheet', 'media', 'font', 'texttrack', 'object', 'beacon', 'csp_report', 'imageset'];
 
 function processVillageData(table) {
     const villageList = {};
@@ -56,6 +57,7 @@ async function fetchMachines(location) {
     const browser = await puppeteer.launch({
         headless: true, // false: enables one to view the Chrome instance in action
         defaultViewport: null, // (optional) useful only in non-headless mode
+        userDataDir: '/tmp/WashAlertCache',
     });
     const page = await browser.newPage();
     // page.on('console', consoleMessageObject => function (consoleMessageObject) {
@@ -67,7 +69,7 @@ async function fetchMachines(location) {
 
     await page.setRequestInterception(true);
     page.on('request', (request) => {
-        if (['image', 'stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
+        if (ignoredRequests.indexOf(request.resourceType()) > 0) {
             request.abort();
         } else {
             request.continue();
@@ -85,6 +87,7 @@ async function fetchLocations(location) {
     const browser = await puppeteer.launch({
         headless: true, // false: enables one to view the Chrome instance in action
         defaultViewport: null, // (optional) useful only in non-headless mode
+        userDataDir: '/tmp/WashAlertCache',
     });
     const page = await browser.newPage();
     // page.on('console', consoleMessageObject => function (consoleMessageObject) {
@@ -96,7 +99,7 @@ async function fetchLocations(location) {
 
     await page.setRequestInterception(true);
     page.on('request', (request) => {
-        if (['image', 'stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
+        if (ignoredRequests.indexOf(request.resourceType()) !== -1) {
             request.abort();
         } else {
             request.continue();
@@ -111,9 +114,9 @@ async function fetchLocations(location) {
         .map(async (building) => fetchMachines(locationList[building])
             .then((result) => {
                 locationList[building].machines = result;
-                for (const index in result) {
+                Object.keys(result).forEach((index) => {
                     machineList[index] = result[index];
-                }
+                });
             }));
     await Promise.all(promises);
 
@@ -125,6 +128,7 @@ export async function fetchVillages(url: string) {
     const browser = await puppeteer.launch({
         headless: true, // false: enables one to view the Chrome instance in action
         defaultViewport: null, // (optional) useful only in non-headless mode
+        userDataDir: '/tmp/WashAlertCache',
     });
     const page = await browser.newPage();
     // page.on('console', consoleMessageObject => function (consoleMessageObject) {
@@ -136,7 +140,7 @@ export async function fetchVillages(url: string) {
 
     await page.setRequestInterception(true);
     page.on('request', (request) => {
-        if (['image', 'stylesheet', 'font', 'script'].indexOf(request.resourceType()) !== -1) {
+        if (ignoredRequests.indexOf(request.resourceType()) !== -1) {
             request.abort();
         } else {
             request.continue();

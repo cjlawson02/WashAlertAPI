@@ -1,12 +1,8 @@
 import sgMail from '@sendgrid/mail';
 
-import carrierList from './carrieremail.json';
+import { getCarrierGateway } from './util';
 
-function getCarrierGateway(carrier) {
-    return carrierList.carriers.find((record) => record.name === carrier).gateway;
-}
-
-export default class TextMessageHandler {
+export default class TextHandler {
     constructor(apiKey: string) {
         sgMail.setApiKey(apiKey);
     }

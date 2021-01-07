@@ -1,6 +1,6 @@
 import admin from 'firebase-admin';
 import GroupMeHandler from './groupmehandler';
-import TextMessageHandler from './textmessagehandler';
+import TextHandler from './texthandler';
 
 export default class FirebaseHandler {
     firebase: admin.app.App
@@ -9,7 +9,7 @@ export default class FirebaseHandler {
 
     defaultDatabase: admin.database.Database
 
-    constructor(serviceAccount: any, groupMeHandler: GroupMeHandler, textHandler: TextMessageHandler) {
+    constructor(serviceAccount: any, groupMeHandler: GroupMeHandler, textHandler: TextHandler) {
         // Initialize Firebase
         this.firebase = admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
