@@ -1,4 +1,4 @@
-import { fetchVillages, MAIN_URL } from './machinescraper';
+import { fetchAllMachines, fetchVillages, MAIN_URL } from './machinescraper';
 import GroupMeHandler from './groupmehandler';
 import TextHandler from './texthandler';
 import FirebaseHandler from './firebaseHandler';
@@ -36,4 +36,5 @@ if (require.main === module) {
     console.log('[App] Starting app...');
 
     updateMachines();
+    // fetchAllMachines();
 }
